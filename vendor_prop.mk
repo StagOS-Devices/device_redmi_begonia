@@ -428,7 +428,7 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     persist.dbg.wfc_avail_ovr=1
 
 # SurfaceFlinger
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.has_HDR_display=true \
     ro.surface_flinger.has_wide_color_display=true \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
@@ -442,3 +442,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.early_app_phase_offset_ns=500000 \
     debug.sf.early_gl_phase_offset_ns=3000000 \
     debug.sf.early_gl_app_phase_offset_ns=15000000
+
+# Zygote preforking
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.device_config.runtime_native.usap_pool_enabled=true
