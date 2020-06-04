@@ -49,6 +49,9 @@ TARGET_BOOTLOADER_BOARD_NAME := begonia
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
+#Build Rules
+BUILD_BROKEN_DUP_RULES := true
+
 # Dex
 ifeq ($(HOST_OS),linux)
   ifneq ($(TARGET_BUILD_VARIANT),eng)
