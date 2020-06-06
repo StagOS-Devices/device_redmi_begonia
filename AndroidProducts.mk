@@ -15,9 +15,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/superior_begonia.mk
+    $(LOCAL_DIR)/stag_begonia.mk
 
     COMMON_LUNCH_CHOICES := \
-     superior_begonia-user \
-     superior_begonia-userdebug \
-     superior_begonia-eng
+     stag_begonia-user \
+     stag_begonia-userdebug \
+     stag_begonia-eng
