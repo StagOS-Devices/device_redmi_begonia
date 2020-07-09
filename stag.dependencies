@@ -1,11 +1,14 @@
 [
-  {
-    "repository" : "AgentFabulous/begonia",
-    "target_path": "kernel/xiaomi/mt6785",
-    "branch" : "android-10.0"
-  },
-  {
-    "repository" : "vendor_redmi_begonia",
-    "target_path": "vendor/redmi/begonia"
-  }
+ {
+   "repository": "kernel_xiaomi_mt6785",
+   "target_path": "kernel/xiaomi/mt6785",
+   "branch": "ten",
+   "remote": "stagos-devices"
+ },
+ {
+   "repository": "vendor_redmi_begonia",
+   "target_path": "vendor/redmi/begonia",
+   "branch": "ten",
+   "remote": "stagos-devices"
+ }
 ]
