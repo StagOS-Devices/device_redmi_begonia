@@ -242,6 +242,7 @@ PRODUCT_PACKAGES += \
     meta_init.rc \
     multi_init.rc \
     fstab.mt6785 \
+    init.xiaomi_parts.rc \
     ueventd.mtk.rc
 
 # Ramdisk For Kernel
@@ -318,6 +319,10 @@ PRODUCT_COPY_FILES += \
 
 # Kernel
 $(call inherit-product, device/xiaomi/begonia-kernel/kernel.mk)
+
+# XiaomiParts
+PRODUCT_PACKAGES += \
+     XiaomiParts
 
 # Inherit vendor
 $(call inherit-product, vendor/xiaomi/begonia/begonia-vendor.mk)
