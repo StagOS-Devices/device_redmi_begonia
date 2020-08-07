@@ -219,6 +219,7 @@ PRODUCT_PACKAGES += \
     multi_init.rc \
     fstab.enableswap \
     fstab.mt6785 \
+    init.xiaomi_parts.rc \
     ueventd.mtk.rc
 
 # Ramdisk for kernel
@@ -308,6 +309,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/sn100u_pnx_pcv.pnscr:$(TARGET_COPY_OUT_VENDOR)/etc/sn100u_pnx_pcv.pnscr \
     $(LOCAL_PATH)/nfc/sn100u_pnx_sst.pnscr:$(TARGET_COPY_OUT_VENDOR)/etc/sn100u_pnx_sst.pnscr
 
+
 PRODUCT_COPY_FILES += \
     prebuilts/vndk/v29/arm64/arch-arm-armv8-a/shared/vndk-core/android.hardware.audio.common@5.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/android.hardware.audio.common@5.0-v29.so \
     prebuilts/vndk/v29/arm64/arch-arm-armv8-a/shared/vndk-core/android.hardware.audio.effect@5.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/android.hardware.audio.effect@5.0-v29.so \
@@ -363,5 +365,9 @@ PRODUCT_PACKAGES += \
 # MediaTek IMS
 $(call inherit-product, vendor/mediatek/ims/mtk-ims.mk)
 
+# XiaomiParts
+PRODUCT_PACKAGES += \
+     XiaomiParts
+    
 # Inherit vendor
 $(call inherit-product, vendor/redmi/begonia/begonia-vendor.mk)
