@@ -3,7 +3,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
- DEVICE_PATH := device/redmi/begonia
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
@@ -54,14 +53,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
 
-# Custom APNs
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
-
 # Configstore
 PRODUCT_PACKAGES += \
     android.hardware.configstore@1.1-service
-
 
 # Display
 PRODUCT_PACKAGES += \
@@ -102,12 +96,12 @@ PRODUCT_PACKAGES += \
 
 # Input
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/idc/uinput-fpc.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/uinput-fpc.idc \
-    $(LOCAL_PATH)/configs/idc/uinput-goodix.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/uinput-goodix.idc
+    $(LOCAL_PATH)/configs/idc/uinput-fpc.idc:system/usr/idc/uinput-fpc.idc \
+    $(LOCAL_PATH)/configs/idc/uinput-goodix.idc:system/usr/idc/uinput-goodix.idc
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-fpc.kl \
-    $(LOCAL_PATH)/configs/keylayout/uinput-goodix.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-goodix.kl
+    $(LOCAL_PATH)/configs/keylayout/uinput-fpc.kl:system/usr/keylayout/uinput-fpc.kl \
+    $(LOCAL_PATH)/configs/keylayout/uinput-goodix.kl:system/usr/keylayout/uinput-goodix.kl
 
 # IR
 PRODUCT_PACKAGES += \
@@ -183,15 +177,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/permissions/privapp-permissions-mediatek.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-mediatek.xml \
     $(LOCAL_PATH)/configs/permissions/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
 
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.1-impl \
-    android.hardware.power@1.2-impl \
-    android.hardware.nfc@1.1-service \
-    NfcNci \
-    Tag \
-    com.android.nfc_extras
-
 # Properties
 -include $(LOCAL_PATH)/vendor_prop.mk
 
@@ -212,6 +197,9 @@ PRODUCT_PACKAGES += \
     teardown_loopback.sh \
     tp_data_collect.sh \
     tp_selftest.sh \
+    factory_init.connectivity.rc \
+    factory_init.project.rc \
+    factory_init.rc \
     init.aee.rc \
     init.ago.rc \
     init.connectivity.rc \
@@ -225,16 +213,9 @@ PRODUCT_PACKAGES += \
     meta_init.project.rc \
     meta_init.rc \
     multi_init.rc \
+    fstab.enableswap \
     fstab.mt6785 \
-    init.xiaomi_parts.rc \
     ueventd.mtk.rc
-
-# RCS
-PRODUCT_PACKAGES += \
-    rcs_service_aidl \
-    rcs_service_aidl.xml \
-    rcs_service_api \
-    rcs_service_api.xml
 
 # RenderScript
 PRODUCT_PACKAGES += \
@@ -297,6 +278,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_begonia/com.nxp.mifare.xml
 
 PRODUCT_PACKAGES += \
+    android.hardware.nfc@1.1-service \
     com.android.nfc_extras \
     NfcNci \
     Tag
@@ -324,9 +306,5 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/sn100u_pnx_pcv.pnscr:$(TARGET_COPY_OUT_VENDOR)/etc/sn100u_pnx_pcv.pnscr \
     $(LOCAL_PATH)/nfc/sn100u_pnx_sst.pnscr:$(TARGET_COPY_OUT_VENDOR)/etc/sn100u_pnx_sst.pnscr
 
-# XiaomiParts
-PRODUCT_PACKAGES += \
-     XiaomiParts
-    
 # Inherit vendor
 $(call inherit-product, vendor/redmi/begonia/begonia-vendor.mk)

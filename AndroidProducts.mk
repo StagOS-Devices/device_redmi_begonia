@@ -15,9 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/stag_begonia.mk
-
-    COMMON_LUNCH_CHOICES := \
-     stag_begonia-user \
-     stag_begonia-userdebug \
-     stag_begonia-eng
+    $(LOCAL_DIR)/potato_begonia.mk
