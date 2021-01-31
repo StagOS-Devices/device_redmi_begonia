@@ -1,0 +1,31 @@
+[
+  {
+    "repository" : "Descendant-Devices/kernel_xiaomi_mt6785",
+    "target_path": "kernel/xiaomi/mt6785",
+    "branch" : "eleven"
+  },
+  {
+    "repository" : "vendor_redmi_begonia",
+    "target_path": "vendor/redmi/begonia"
+  },
+  {
+    "repository" : "PotatoDevices/vendor_mediatek_opensource",
+    "target_path": "vendor/mediatek/opensource",
+    "branch" : "dumaloo-release"
+  },
+  {
+    "repository" : "PotatoDevices/vendor_mediatek_interfaces",
+    "target_path": "vendor/mediatek/interfaces",
+    "branch" : "dumaloo-release"
+  },
+  {
+    "repository" : "Descendant-Devices/vendor_mediatek_ims",
+    "target_path": "vendor/mediatek/ims",
+    "branch"     : "eleven"
+  },
+  {
+    "repository": "iitachiuchiha/vendor_ANXCamera",
+    "target_path": "vendor/ANXCamera",
+    "branch": "eleven"
+   }
+]
