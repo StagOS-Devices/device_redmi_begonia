@@ -18,7 +18,7 @@ if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
 
 POTATO_ROOT="${MY_DIR}/../../.."
 
-HELPER="${POTATO_ROOT}/vendor/potato/build/tools/extract_utils.sh"
+HELPER="${POTATO_ROOT}/vendor/stag/build/tools/extract_utils.sh"
 if [ ! -f "${HELPER}" ]; then
     echo "Unable to find helper script at ${HELPER}"
     exit 1
@@ -26,7 +26,7 @@ fi
 source "${HELPER}"
 
 # Initialize the helper for common
-setup_vendor "${DEVICE}" "${VENDOR}" "${POTATO_ROOT}" true
+setup_vendor "${DEVICE}" "${VENDOR}" "${STAG_ROOT}" true
 
 # Copyright headers and guards
 write_headers "${DEVICE}"
