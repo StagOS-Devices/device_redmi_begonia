@@ -1,12 +1,14 @@
 [
   {
-    "repository" : "Descendant-Devices/kernel_xiaomi_mt6785",
+    "repository" : "AgentFabulous/begonia",
     "target_path": "kernel/xiaomi/mt6785",
-    "branch" : "eleven"
+    "branch" : "android-11.0"
   },
   {
     "repository" : "vendor_redmi_begonia",
-    "target_path": "vendor/redmi/begonia"
+    "target_path": "vendor/redmi/begonia",
+    "remote": "gitlab-stag",
+    "branch": "11"
   },
   {
     "repository" : "PotatoDevices/vendor_mediatek_opensource",
@@ -24,8 +26,9 @@
     "branch"     : "eleven"
   },
   {
-    "repository": "iitachiuchiha/vendor_ANXCamera",
+    "repository": "Flamefusion/vendor_ANXCamera",
     "target_path": "vendor/ANXCamera",
+    "remote": "gitlab",
     "branch": "eleven"
    }
 ]
