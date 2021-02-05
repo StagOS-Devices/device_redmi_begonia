@@ -29,6 +29,9 @@ $(call inherit-product, device/redmi/begonia/device.mk)
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/stag/main.mk)
 
+# Track ANXCamera
+$(call inherit-product, vendor/ANXCamera/config.mk)
+
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := begonia
 PRODUCT_NAME := stag_begonia
