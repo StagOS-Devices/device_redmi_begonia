@@ -355,7 +355,11 @@ PRODUCT_PACKAGES += \
 # Video Telephony
 PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.videotelephony@1.0
-
+	
+# Wallpapers
+PRODUCT_PACKAGES += \
+    PixelLiveWallpaperPrebuilt
+	
 # MediaTek IMS
 $(call inherit-product, vendor/mediatek/ims/mtk-ims.mk)
 
