@@ -30,11 +30,5 @@
     "target_path": "vendor/ANXCamera",
     "remote": "gitlab",
     "branch": "eleven"
-   },
-   {
-    "repository" : "Flamefusion/packages_apps_PixelLiveWallpaper",
-    "target_path": "packages/apps/PixelLiveWallpaper",
-    "branch"     : "11",
-    "remote"     : "gitlab"
-  }
+   }
 ]
