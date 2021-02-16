@@ -30,5 +30,11 @@
     "target_path": "vendor/ANXCamera",
     "remote": "gitlab",
     "branch": "eleven"
-   }
+   },
+   {
+   "repository": "Flamefusion/vendor_redmi_begonia-firmware",
+    "target_path": "vendor/redmi/begonia-firmware",
+    "remote": "github",
+    "branch": "dumaloo-release"
+	}
 ]
