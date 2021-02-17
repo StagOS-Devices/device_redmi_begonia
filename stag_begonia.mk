@@ -29,6 +29,9 @@ $(call inherit-product, device/redmi/begonia/device.mk)
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/stag/main.mk)
 
+#Inherit NexusLauncherRelease
+$(call inherit-product, packages/apps/NexusLauncherRelease/NexusLauncherRelease.mk)
+
 # Track ANXCamera
 $(call inherit-product, vendor/ANXCamera/config.mk)
 

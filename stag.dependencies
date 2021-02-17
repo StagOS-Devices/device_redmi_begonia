@@ -36,5 +36,11 @@
     "target_path": "vendor/redmi/begonia-firmware",
     "remote": "github",
     "branch": "dumaloo-release"
+	},
+	{
+	"repository": "Flamefusion/packages_apps_NexusLauncherRelease",
+    "target_path": "packages/apps/NexusLauncherRelease",
+    "remote": "gitlab",
+    "branch": "master"
 	}
 ]
