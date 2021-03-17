@@ -106,7 +106,6 @@ vendor/etc/audio_param/tfa98xx_music.bin
 vendor/etc/audio_param/tfa98xx_ringtone.bin
 vendor/etc/audio_param/tfa98xx_voice.bin
 vendor/etc/default_volume_tables.xml
-vendor/etc/permissions/android.hardware.microphone.xml
 vendor/firmware/tfa98xx.cnt
 vendor/lib/libaudio_param_parser-vnd.so
 vendor/lib/libaudiocompensationfilter_vendor.so
@@ -162,6 +161,7 @@ lib64/libaptXHD_encoder.so|fdbca5626fee8607d90bea2a6903eeebf396a7cf
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-mediatek
 vendor/etc/audio_policy_configuration_bluetooth_legacy_hal.xml
 vendor/etc/init/android.hardware.bluetooth@1.0-service-mediatek.rc
+vendor/lib/hw/android.hardware.bluetooth.audio@2.0-impl.so
 vendor/lib/hw/android.hardware.bluetooth@1.0-impl-mediatek.so
 vendor/lib/hw/audio.bluetooth.default.so
 vendor/lib/libbluetoothem_mtk.so
@@ -171,6 +171,7 @@ vendor/lib/libbluetooth_mtk.so
 vendor/lib/libbluetooth_mtk_pure.so
 vendor/lib/libbluetooth_relayer.so
 vendor/lib/libbt-vendor.so
+vendor/lib64/hw/android.hardware.bluetooth.audio@2.0-impl.so
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-mediatek.so
 vendor/lib64/hw/audio.bluetooth.default.so
 vendor/lib64/libbluetoothem_mtk.so
@@ -680,9 +681,6 @@ vendor/lib64/libarcsoft_portrait_lighting_c.so
 vendor/lib64/libarcsoft_preview_deflicker.so
 
 # Camera-configs
-vendor/camera/fonts/MFYueYuan-Regular.ttf
-vendor/camera/fonts/MI+LanTing_GB+Outside+YS_V2.3_20160322.ttf
-vendor/camera/fonts/MIUI_Time.ttf
 vendor/etc/camera/beauty_ui9_intelligent_params.config
 vendor/etc/camera/CFR_para_T.bin
 vendor/etc/camera/CFR_para_UW.bin
@@ -702,18 +700,28 @@ vendor/lib64/hw/consumerir.mt6785.so
 vendor/lib/liboemcrypto.so
 vendor/lib64/liboemcrypto.so
 
+# DRM-ClearKey
+vendor/bin/hw/android.hardware.drm@1.2-service.clearkey
+vendor/etc/init/android.hardware.drm@1.2-service.clearkey.rc
+
 # DRM-Widevine
 vendor/bin/hw/android.hardware.drm@1.2-service.widevine
 vendor/etc/init/android.hardware.drm@1.2-service.widevine.rc
 vendor/lib/libwvhidl.so
+vendor/lib/mediadrm/libdrmclearkeyplugin.so
+vendor/lib/mediadrm/libmockdrmcryptoplugin.so
 vendor/lib/mediadrm/libwvdrmengine.so
 vendor/lib64/libwvhidl.so
+vendor/lib64/mediadrm/libdrmclearkeyplugin.so
+vendor/lib64/mediadrm/libmockdrmcryptoplugin.so
 vendor/lib64/mediadrm/libwvdrmengine.so
 
 # Display-Hardware
+vendor/lib/hw/android.hardware.graphics.mapper@2.0-impl-2.1.so
 vendor/lib/hw/gralloc.default.so
 vendor/lib/hw/gralloc.mt6785.so
 vendor/lib/hw/memtrack.mt6785.so
+vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl-2.1.so
 vendor/lib64/hw/gralloc.default.so
 vendor/lib64/hw/gralloc.mt6785.so
 vendor/lib64/hw/hwcomposer.mt6785.so
@@ -877,7 +885,6 @@ vendor/etc/init/vendor.mediatek.hardware.nvram@1.1-sevice.rc
 vendor/etc/init/vendor.mediatek.hardware.pq@2.2-service.rc
 vendor/etc/media_codecs_mediatek_audio.xml
 vendor/etc/media_codecs_mediatek_video.xml
-vendor/etc/permissions/com.mediatek.hardware.vow.xml
 vendor/etc/vintf/manifest/vendor.mediatek.hardware.dplanner@2.0-service.xml
 vendor/lib/hw/android.hardware.audio@5.0-impl-mediatek.so
 vendor/lib/hw/vendor.mediatek.hardware.camera.atms@1.0-impl.so
@@ -1137,7 +1144,9 @@ lib64/libvcodec_cap.so
 lib64/libvcodec_capenc.so
 
 # NFC
+vendor/bin/hw/vendor.nxp.hardware.nfc@1.1-service|86ceb76df5de43e06efc6d767ea80ee19e72279d
 vendor/bin/pnscr|8b1679a6577cc98939284021ba74aab8c7808bcd
+vendor/etc/init/vendor.nxp.hardware.nfc@1.1-service.rc|c2afa78852ed6c2d5a9df9dbc3e3b448a001d57f
 vendor/etc/nxp/Phone_bt_bt.bin
 vendor/etc/nxp/Phone_hsmic_hs.bin
 vendor/etc/nxp/Phone_mic_hp.bin
@@ -1173,8 +1182,10 @@ vendor/lib/libnxprecord.so
 vendor/lib/libnxpspeech.so
 vendor/lib/libsn100u_fw.so|c6ae3eb6085c5077041a1301db8f34b0b6dcce4e
 vendor/lib/libteeclientjni.so|f5323b48c4fcba3afb3bd231424a5bb288334eab
+vendor/lib/nfc_nci.nqx.default.hw.so|df4edc97a6d7362fb309ecd1b16b4b5a4d52fe64
 vendor/lib/se_extn_client.so|e009018d0c0768a36df219526fc0c44b82c111a9
 vendor/lib/secure_element-impl.so|1efda3e2eae92983fabddaaefb1d3b86767dcdca
+vendor/lib/vendor.nxp.hardware.nfc@1.0.so|e8c05f952af993d96d5d39d43798066c3c50fd7d
 vendor/lib64/hw/nfc_nci.nqx.default.so|4cb2ef4eefad3816f58247bc37c68130ad264c49
 vendor/lib64/jcos_client.so|a9ffd477ce0be9887b6c54fdea1a1bbb85d7fe3d
 vendor/lib64/lib_smartpa_nxp_ap.so
@@ -1184,8 +1195,10 @@ vendor/lib64/libnxp_extamp_intf.so
 vendor/lib64/libnxprecord.so
 vendor/lib64/libnxpspeech.so
 vendor/lib64/libteeclientjni.so|a7c4b2f62fe68b76970849c63877ce28ea2cf481
+vendor/lib64/nfc_nci.nqx.default.hw.so|7593439e7cf53666691b4be5014c7e3eb3014b01
 vendor/lib64/se_extn_client.so|7b7596727e9b72a5ca023adf126ddbc88d225fee
 vendor/lib64/secure_element-impl.so|eeb158f3bba4b0690683246ddd1a94bf8a2a0294
+vendor/lib64/vendor.nxp.hardware.nfc@1.0.so|a5538536513ac2aecf90f9942ff424014ed28e3e
 
 # Neural-networks
 vendor/bin/hw/android.hardware.neuralnetworks@1.1-service-gpunn
@@ -1237,9 +1250,11 @@ vendor/lib/libvsim.so
 
 # Sensors
 vendor/lib/hw/sensors.touch.so
+vendor/lib/libsensorndkbridge.so
 vendor/lib/libssccalapi.so
 vendor/lib64/hw/sensors.mt6785.so
 vendor/lib64/hw/sensors.touch.so
+vendor/lib64/libsensorndkbridge.so
 vendor/lib64/libsensor_custom.so
 vendor/lib64/libssccalapi.so
 
@@ -1251,6 +1266,7 @@ vendor/etc/init/vendor.microtrust.hardware.soter@1.0-service.rc
 vendor/lib64/vendor.microtrust.hardware.soter@1.0.so
 
 # Thermal
+vendor/bin/hw/android.hardware.thermal@1.0-service
 vendor/bin/mi_thermald
 vendor/bin/thermal
 vendor/bin/thermalloadalgod
@@ -1258,6 +1274,7 @@ vendor/bin/thermal_manager
 vendor/etc/.tp/.thermal_policy_08
 vendor/etc/.tp/thermal.conf
 vendor/etc/.tp/thermal.off.conf
+vendor/etc/init/android.hardware.thermal@1.0-service.rc
 vendor/etc/init/init.thermal.rc
 vendor/etc/init/init.thermalloadalgod.rc
 vendor/etc/init/init.thermal_manager.rc
@@ -1271,15 +1288,13 @@ vendor/etc/thermal-phone.conf
 vendor/etc/thermal-tgame.conf
 vendor/etc/thermal-youtube.conf
 vendor/etc/thermald-devices.conf
+vendor/lib/hw/android.hardware.thermal@1.0-impl.so
 vendor/lib/libthermalalgo.so
+vendor/lib64/hw/android.hardware.thermal@1.0-impl.so
 
 # Thermal-Hardware
 vendor/lib/hw/thermal.mt6785.so
 vendor/lib64/hw/thermal.mt6785.so
-
-# Vibrator
-vendor/lib/hw/vibrator.default.so
-vendor/lib64/hw/vibrator.default.so
 
 # WiFi
 vendor/bin/hostapd_cli
@@ -1410,11 +1425,6 @@ vendor/etc/init/nvram_daemon.rc
 vendor/etc/init/vendor.microtrust.hardware.capi@2.0-service.rc
 vendor/etc/init_panel_info.sh
 vendor/etc/partition_permission.sh
-vendor/etc/rcv.wav
-vendor/etc/spk.wav
-vendor/etc/spk_hp.wav
-vendor/etc/stereo.wav
-vendor/fstab.enableswap
 
 # Misc
 vendor/bin/aeev
@@ -1434,6 +1444,7 @@ vendor/bin/dexecutor
 vendor/bin/doeapp-memtester
 vendor/bin/doeapp-sat
 vendor/bin/dtc_vendor
+vendor/bin/dumpsys
 vendor/bin/em_hidl
 vendor/bin/epdg_wod
 vendor/bin/flashlessd
@@ -1882,10 +1893,6 @@ vendor/etc/security/cacerts_supl/lab/ef4b31e6.0
 vendor/etc/slp_conf
 vendor/etc/smsdbvisitor.xml
 vendor/etc/special_pws_channel.xml
-vendor/etc/spk_cal_pinknoise.wav
-vendor/etc/spk_cal_silence.wav
-vendor/etc/spk_cal_sweep.wav
-vendor/etc/spk_cal_whitenoise.wav
 vendor/etc/spn-conf-op09.xml
 vendor/etc/throttle.sh
 vendor/etc/tianma_fhd_nt36672a_dsi_vdo_lcm_drv_mi.xml
@@ -1953,6 +1960,8 @@ vendor/etc/voicecommand/training/ubmfile/supplement/6
 vendor/etc/voicecommand/training/ubmfile/supplement/7
 vendor/etc/voicecommand/training/ubmfile/supplement/8
 vendor/etc/voicecommand/training/ubmfile/supplement/9
+vendor/lib/android.hardware.audio.common-util.so
+vendor/lib/android.hardware.audio.common@5.0-util.so
 vendor/lib/AVCSecureVdecCA.so
 vendor/lib/gc2375af_mipi_raw_IdxMgr.so
 vendor/lib/gc2375af_mipi_raw_tuning.so
@@ -2137,6 +2146,8 @@ vendor/lib/s5kgw1sp_mipi_raw_tuning.so
 vendor/lib/s5kgw1sunny_mipi_raw_IdxMgr.so
 vendor/lib/s5kgw1sunny_mipi_raw_tuning.so
 vendor/lib/vendor.microtrust.hardware.capi@2.0.so
+vendor/lib64/android.hardware.audio.common-util.so
+vendor/lib64/android.hardware.audio.common@5.0-util.so
 vendor/lib64/AVCSecureVdecCA.so
 vendor/lib64/gc2375af_mipi_raw_IdxMgr.so
 vendor/lib64/gc2375af_mipi_raw_tuning.so
@@ -2146,6 +2157,7 @@ vendor/lib64/gc2375beta_mipi_raw_IdxMgr.so
 vendor/lib64/gc2375beta_mipi_raw_tuning.so
 vendor/lib64/gc5035_mipi_raw_IdxMgr.so
 vendor/lib64/gc5035_mipi_raw_tuning.so
+vendor/lib64/hw/android.hardware.soundtrigger@2.2-impl.so
 vendor/lib64/hw/dfps.mt6785.so
 vendor/lib64/hw/displayfeature.default.so
 vendor/lib64/hw/flp.default.so
@@ -2332,13 +2344,6 @@ vendor/lib64/s5kgw1sunny_mipi_raw_IdxMgr.so
 vendor/lib64/s5kgw1sunny_mipi_raw_tuning.so
 vendor/lib64/vendor.microtrust.hardware.capi@2.0.so
 vendor/lib64/wechat.beanpod.so
-vendor/res/images/lcd_test_00.png
-vendor/res/images/lcd_test_01.png
-vendor/res/images/lcd_test_02.png
-vendor/res/sound/ringtone.wav
-vendor/res/sound/testpattern1.wav
-vendor/ro.prop
-vendor/rw.prop
 vendor/thh/ta/0102030405060708090a0b0c0d0e0f10.ta
 vendor/thh/ta/020b0000000000000000000000000000.ta
 vendor/thh/ta/020f0000000000000000000000000000.ta
@@ -2363,7 +2368,7 @@ vendor/thh/ta/7778c03fc30c4dd0a319ea29643d4d4b.ta
 vendor/thh/ta/7b66512021214487ba710a51d7ea78fe.ta
 vendor/thh/ta/85f630e0f0964c5fa2cc268ce04e3da3.ta
 vendor/thh/ta/86f623f6a2994dfdb560ffd3e5a62c29.ta
-vendor/thh/ta/8888c03fc30c4dd0a319ea29643d4d4b.ta|97068dc079e7d3029cbb5ac715d194f99e55c145
+vendor/thh/ta/8888c03fc30c4dd0a319ea29643d4d4b.ta
 vendor/thh/ta/9073f03a9618383bb1856eb3f990babd.ta
 vendor/thh/ta/93feffccd8ca11e796c7c7a21acb4932.ta
 vendor/thh/ta/98fb95bcb4bf42d26473eae48690d7ea.ta

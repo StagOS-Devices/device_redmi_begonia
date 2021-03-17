@@ -130,7 +130,7 @@ on fs
     write /proc/sys/vm/page-cluster 0
     write /proc/sys/vm/swappiness 100
     write /sys/kernel/mm/swap/vma_ra_enabled false
-    swapon_all /vendor/fstab.enableswap
+    swapon_all /vendor/fstab.mt6785
     mkdir /mnt/vendor/persist/stability 0755 system system
     mkdir /mnt/vendor/persist/misys 0755 system system
     #Audio-add
@@ -1115,9 +1115,3 @@ service charger system/bin/charger
     #seclabel u:r:charger:s0
     group system graphics
     seclabel u:r:healthd:s0
-
-on property:persist.sys.begonia.dt2w=0
-    exec /system/bin/sendevent /dev/input/event2 0 1 4
-
-on property:persist.sys.begonia.dt2w=1
-    exec /system/bin/sendevent /dev/input/event2 0 1 5

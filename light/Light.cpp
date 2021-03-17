@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.light@2.0-service.begonia"
+#define LOG_TAG "LightService"
 
 #include <log/log.h>
 
@@ -23,7 +23,7 @@
 #include <fstream>
 
 #define LCD_LED         "/sys/class/leds/lcd-backlight/"
-#define NOTIFICATION_LED       "/sys/class/leds/white/"
+#define WHITE_LED       "/sys/class/leds/white/"
 
 #define BREATH_MODE     "breath_mode"
 #define BRIGHTNESS      "brightness"
@@ -65,21 +65,19 @@ static uint32_t getBrightness(const LightState& state) {
     blue = state.color & 0xFF;
 
     /*
-     * Scale RGB brightness using Alpha brightness.
+     * Scale RGB brightness if Alpha brightness is not 0xFF.
      */
-    red = red * alpha / 0xFF;
-    green = green * alpha / 0xFF;
-    blue = blue * alpha / 0xFF;
+    if (alpha != 0xFF) {
+        red = red * alpha / 0xFF;
+        green = green * alpha / 0xFF;
+        blue = blue * alpha / 0xFF;
+    }
 
     return (77 * red + 150 * green + 29 * blue) >> 8;
 }
 
 static inline uint32_t scaleBrightness(uint32_t brightness, uint32_t maxBrightness) {
-    if (brightness == 0) {
-        return 0;
-    }
-
-    return (brightness - 1) * (maxBrightness - 1) / (0xFF - 1) + 1;
+    return brightness * maxBrightness / 0xFF;
 }
 
 static inline uint32_t getScaledBrightness(const LightState& state, uint32_t maxBrightness) {
@@ -95,38 +93,27 @@ static void handleNotification(const LightState& state) {
     uint32_t whiteBrightness = getScaledBrightness(state, MAX_LED_BRIGHTNESS);
 
     /* Disable breathing or blinking */
-    set(NOTIFICATION_LED BRIGHTNESS, 0);
+    set(WHITE_LED BRIGHTNESS, 0);
 
     switch (state.flashMode) {
         case Flash::HARDWARE:
-            /* Breathing */
-            set(NOTIFICATION_LED TRIGGER, BREATH_MODE);
+            /* Breathing */  
+            set(WHITE_LED TRIGGER, BREATH_MODE);
             break;
         case Flash::TIMED:
             /* Blinking */
-            set(NOTIFICATION_LED TRIGGER, PWM_MODE);
+            set(WHITE_LED TRIGGER, PWM_MODE);
             break;
         case Flash::NONE:
         default:
-            set(NOTIFICATION_LED TRIGGER, CC_MODE);
+            set(WHITE_LED TRIGGER, CC_MODE);
     }
 
-    set(NOTIFICATION_LED BRIGHTNESS, whiteBrightness);
+    set(WHITE_LED BRIGHTNESS, whiteBrightness);
 }
 
-static inline bool isStateLit(const LightState& state) {
+static inline bool isLit(const LightState& state) {
     return state.color & 0x00ffffff;
-}
-
-static inline bool isStateEqual(const LightState& first, const LightState& second) {
-    if (first.color == second.color && first.flashMode == second.flashMode &&
-            first.flashOnMs == second.flashOnMs &&
-            first.flashOffMs == second.flashOffMs &&
-            first.brightnessMode == second.brightnessMode) {
-        return true;
-    }
-
-    return false;
 }
 
 /* Keep sorted in the order of importance. */
@@ -137,40 +124,6 @@ static std::vector<LightBackend> backends = {
     { Type::BACKLIGHT, handleBacklight },
 };
 
-static LightStateHandler findHandler(Type type) {
-    for (const LightBackend& backend : backends) {
-        if (backend.type == type) {
-            return backend.handler;
-        }
-    }
-
-    return nullptr;
-}
-
-static LightState findLitState(LightStateHandler handler) {
-    LightState emptyState;
-
-    for (const LightBackend& backend : backends) {
-        if (backend.handler == handler) {
-            if (isStateLit(backend.state)) {
-                return backend.state;
-            }
-
-            emptyState = backend.state;
-        }
-    }
-
-    return emptyState;
-}
-
-static void updateState(Type type, const LightState& state) {
-    for (LightBackend& backend : backends) {
-        if (backend.type == type) {
-            backend.state = state;
-        }
-    }
-}
-
 }  // anonymous namespace
 
 namespace android {
@@ -180,29 +133,34 @@ namespace V2_0 {
 namespace implementation {
 
 Return<Status> Light::setLight(Type type, const LightState& state) {
+    LightStateHandler handler = nullptr;
+
     /* Lock global mutex until light state is updated. */
     std::lock_guard<std::mutex> lock(globalLock);
 
-    LightStateHandler handler = findHandler(type);
+    /* Update the cached state value for the current type. */
+    for (LightBackend& backend : backends) {
+        if (backend.type == type) {
+            backend.state = state;
+            handler = backend.handler;
+        }
+    }
+
+    /* If no handler has been found, then the type is not supported. */
     if (!handler) {
-        /* If no handler has been found, then the type is not supported. */
         return Status::LIGHT_NOT_SUPPORTED;
     }
 
-    /* Find the old state of the current handler. */
-    LightState oldState = findLitState(handler);
-
-    /* Update the cached state value for the current type. */
-    updateState(type, state);
-
-    /* Find the new state of the current handler. */
-    LightState newState = findLitState(handler);
-
-    if (isStateEqual(oldState, newState)) {
-        return Status::SUCCESS;
+    /* Light up the type with the highest priority that matches the current handler. */
+    for (LightBackend& backend : backends) {
+        if (handler == backend.handler && isLit(backend.state)) {
+            handler(backend.state);
+            return Status::SUCCESS;
+        }
     }
 
-    handler(newState);
+    /* If no type has been lit up, then turn off the hardware. */
+    handler(state);
 
     return Status::SUCCESS;
 }
